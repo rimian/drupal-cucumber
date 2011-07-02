@@ -10,8 +10,11 @@ class BootstrapSteps extends CucumberSteps {
   * Given /^I bootstrap Drupal$/
   **/
   public function stepIBootstrapDrupal() {
-    include('drupal/includes/bootstrap.inc');
-    self::markPending();
+    chdir('drupal');
+    define('DRUPAL_ROOT', getcwd());
+    $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+    require_once('includes/bootstrap.inc');
+    return drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
   }
 
 

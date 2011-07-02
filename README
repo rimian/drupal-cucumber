@@ -1,1 +1,7 @@
 A cucumber setup interfacing with simpletest/Drupal
+
+Install cuke4php
+This assumes the path to your drupal install is drupal/
+
+Run cuke4php to test drupal bootstraps.
+

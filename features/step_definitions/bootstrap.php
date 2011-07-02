@@ -3,9 +3,15 @@
  * @file
  *
  * Step definitions for bootstrap Drupal
+ *
+ * Write something to Drupal's vars table then check it exists. 
+ * Trash it after.
  */
 
 class BootstrapSteps extends CucumberSteps {
+  
+  private $var_key = 'cucumber_bootstrap_test';
+  
   /**
   * Given /^I bootstrap Drupal$/
   **/
@@ -19,17 +25,18 @@ class BootstrapSteps extends CucumberSteps {
 
 
   /**
-  * When /^I write "([^"]*)" to watchdog$/
+  * When /^I write a string to var_set$/
   **/
-  public function stepIWriteParameterToWatchdog($arg1) {
-      self::markPending();
+  public function stepIWriteAStringToVar_set() {
+    variable_set($this->var_key, 'hello world');
   }
 
 
   /**
-  * Then /^I should see "([^"]*)" in the watchdog table$/
+  * Then /^I should see the string in the variables table$/
   **/
-  public function stepIShouldSeeParameterInTheWatchdogTable($arg1) {
-      self::markPending();
+  public function stepIShouldSeeTheStringInTheVariablesTable() {
+    $this->assertEquals(variable_get($this->var_key, NULL), 'hello world');
+    variable_del($this->var_key);
   }
 }

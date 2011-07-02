@@ -5,5 +5,5 @@ Feature: Bootstrap Drupal
   
     Scenario: Bootstrap
       Given I bootstrap Drupal
-      When I write "hello world" to watchdog
-      Then I should see "hello world" in the watchdog table
+      When I write a string to var_set
+      Then I should see the string in the variables table

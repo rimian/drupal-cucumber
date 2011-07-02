@@ -10,7 +10,8 @@ class BootstrapSteps extends CucumberSteps {
   * Given /^I bootstrap Drupal$/
   **/
   public function stepIBootstrapDrupal() {
-      self::markPending();
+    include('drupal/includes/bootstrap.inc');
+    self::markPending();
   }
 
 

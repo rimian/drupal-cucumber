@@ -13,28 +13,27 @@ class BootstrapSteps extends CucumberSteps {
   private $var_key = 'cucumber_bootstrap_test';
   
   /**
-  * Given /^I bootstrap Drupal$/
-  **/
+   * Given /^I bootstrap Drupal$/
+   *
+   * @see menu_execute_active_handler()
+   */
   public function stepIBootstrapDrupal() {
-    chdir('drupal');
-    define('DRUPAL_ROOT', getcwd());
-    $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-    require_once('includes/bootstrap.inc');
-    return drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+    $online = _menu_site_is_offline() ? MENU_SITE_OFFLINE : MENU_SITE_ONLINE;
+    $this->assertEquals($online, MENU_SITE_ONLINE);
   }
 
 
   /**
-  * When /^I write a string to var_set$/
-  **/
+   * When /^I write a string to var_set$/
+   */
   public function stepIWriteAStringToVar_set() {
     variable_set($this->var_key, 'hello world');
   }
 
 
   /**
-  * Then /^I should see the string in the variables table$/
-  **/
+   * Then /^I should see the string in the variables table$/
+   */
   public function stepIShouldSeeTheStringInTheVariablesTable() {
     $this->assertEquals(variable_get($this->var_key, NULL), 'hello world');
     variable_del($this->var_key);
